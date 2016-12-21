@@ -5,14 +5,23 @@ import java.util.List;
 //on économise donc du temps de calcul à l'aide de la structure d'abre et on élimine au fur et à mesure les branches mortes.
 
 //classe à tester
-    class Arbre_Calcul 
-    {
+    class Arbre_Calcul {
       char contenu;
       List<Arbre_Calcul> fils = new ArrayList<Arbre_Calcul>();
       float score = 0;
+      int depth;
+      String s;
+      double th;
+      double[] best_possible;
       
       Arbre_Calcul(char c){
     	  contenu = c;
+    	  depth = -1;
+      }
+      
+      Arbre_Calcul(char c, int d){
+    	  contenu = c;
+    	  depth = d;
       }
     	   
       Arbre_Calcul(char c, Arbre_Calcul bb){
@@ -21,63 +30,81 @@ import java.util.List;
       }
       /* A R N D C Q E G H I L K M F P S T W Y V */
       
-      Arbre_Calcul(int k){//cette fonction créé l'arbre de tous les mots possibles
-    	  			//ca a l'air de bien marcher
-    	  contenu = '0';
+      Arbre_Calcul(String f, double tha){
+    	  score = 0;
+    	  s = f;
+    	  th = tha;
+    	  depth = -1;
+    	  int k = f.length();
+    	  best_possible = new double[k];
+    	  for(int i=0; i<k;i++){
+    		  best_possible[i]=Task8.score(s.substring(i,k),s.substring(i,k));
+    	  }
+    	  
     	  for(int i = 0; i<k;i++){
-    		  ajouter_etage();
+    		  ajouter_etage(i-1);
     	  }
     	  
       }
       
-      public void ajouter_etage(){
-    	  if(fils.isEmpty()){
-        	  add("A");
-        	  add("R");
-        	  add("N");
-        	  add("D");
-        	  add("C");
-        	  add("Q");
-        	  add("E");
-        	  add("G");
-        	  add("H");
-        	  add("I");
-        	  add("L");
-        	  add("M");
-        	  add("F");
-        	  add("P");
-        	  add("S");
-        	  add("T");
-        	  add("W");
-        	  add("Y");
-        	  add("V");
+      public void ajouter_etage(int d){
+    	  if(depth == d ){
+    		  if(score+best_possible[depth+1]>=th*best_possible[0]){
+        		  add("A");
+            	  add("R");
+            	  add("N");
+            	  add("D");
+            	  add("C");
+            	  add("Q");
+            	  add("E");
+            	  add("G");
+            	  add("H");
+            	  add("I");
+            	  add("L");
+            	  add("M");
+            	  add("F");
+            	  add("P");
+            	  add("S");
+            	  add("T");
+            	  add("W");
+            	  add("Y");
+            	  add("V");
+    		  }
     	  }
     	  else{
+    		  if(depth<d){
     		  for(Arbre_Calcul B : fils){
-    			  B.ajouter_etage();
+    			  B.ajouter_etage(d);
+    		  }
     		  }
     	  }
       }
       
       public void add(Arbre_Calcul B){
+    	  B.depth = depth + 1;
+    	  B.score = score + Blosum50.getScore(B.contenu, s.charAt(B.depth));
+    	  B.s=s;
+    	  B.best_possible = best_possible;
     	  fils.add(B);
       }
-      public void add(String s){
-    	  if(s.isEmpty()==false){
-    		  char c = s.charAt(0);
+      
+      
+      public void add(String f){
+    	  if(f.isEmpty()==false){
+    		  char c = f.charAt(0);
     		  boolean indicateur = true;
     		  if (fils.isEmpty()==false){
     			  for(Arbre_Calcul B : fils){
     			  if(B.contenu == c){
     				  indicateur = false;
-    				  B.add(s.substring(1, s.length()));
+    				  B.add(f.substring(1, f.length()));
     				  break;
     			  }
     		  }
     		  }
     		  if(indicateur){
     			  add(new Arbre_Calcul(c));
-    			  add(s);
+    			  add(f);
     		  
     		  }
     	  
@@ -118,13 +145,15 @@ import java.util.List;
     	  
       }
       
-      public void to_listAux(String s, List<String> answer){
-    	  if(fils.isEmpty()){
-    		  answer.add(s);
+      public void to_listAux(String f, List<String> answer){
+    	  if(f.length() == s.length()){
+    		  if(score>=best_possible[0]){
+    			  answer.add(f);
+    		  }
     	  }
     	  else{
     		  for(Arbre_Calcul B : fils){
-    			  B.to_listAux(s+B.contenu,answer);
+    			  B.to_listAux(f+B.contenu,answer);
     		  }
     	  }
       }
