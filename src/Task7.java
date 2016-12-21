@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class Task7 {
 	static double kills;
 	public static List<String> Wg(String g, int k){//ca marche bien
