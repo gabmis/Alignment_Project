@@ -1,7 +1,7 @@
 How to use our program:
-Place the file containing your DNA sequences in the repository and name it ???
+Place the .txt file containing your DNA sequences in the src directory and name it "seq".
 
-You must run the Main_Interactive.java file.
+You then run the Main_Interactive.java file.
 
 The Tasks asked in the PDF will be accomplished step by step and the results will be printed in the console.
 
