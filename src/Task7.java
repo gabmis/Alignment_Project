@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class Task7 {
 	static double kills;
 	public static List<String> Wg(String g, int k){//ca marche bien
@@ -47,24 +49,18 @@ public class Task7 {
 	
 	public static ArbreSeeds Seeds(String g, double th, int k){//ca marche pas mal aussi
 		List<String> substrings = Wg(g, k);
-		Arbre_Calcul A = new Arbre_Calcul(k);
-		double top;
-		double pourcentage;
+		Arbre_Calcul A;
 		ArbreSeeds seeds = new ArbreSeeds('o');
 		Integer compteur = 0;
-		double[] best_score_restant = new double[k];
+		List<String> X = new ArrayList<String>();
+
 		for(String s : substrings){
 			
-			for(int j = 0; j<k;j++){
-				best_score_restant[j]=Task8.score(s.substring(j, k),s.substring(j, k));
+			A = new Arbre_Calcul(s, th);
+			X = A.to_list();
+			for(String e : X){
+				seeds.add(e, compteur);
 			}
-			
-			A.compute_scores(s);
-			top=th*top(s);
-			kills = 0.0;
-			get_seeds(A, seeds, "", top, k, compteur,best_score_restant);
-			pourcentage = 100*kills/(Math.pow(20, k));
-			System.out.println("le système de destruction de branches a permis d'éliminer "+Math.floor(pourcentage)+"% des calculs");
 			compteur++;
 		}
 		return seeds;
@@ -76,7 +72,7 @@ public class Task7 {
 		//un mot de t.
 		ArbreSeeds seeds = Seeds(g,th,k);//on commence par récupérer Sg
 		System.out.println("nombre de graines : "+seeds.size());
-		seeds.print();
+		//seeds.print();
 		System.out.println("et on obtient un match pour les index suivants: ");
 		List<Integer> answer = new ArrayList<Integer>(); 
 		for(Integer i = 0; i<=t.length() - k;i++){
