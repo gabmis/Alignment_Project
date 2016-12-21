@@ -37,7 +37,11 @@ public class Task7bis {
 		List<String> substrings = Wg(g, k);
 		ArbreSeeds seeds = new ArbreSeeds('o');
 		Integer compteur = 0;
+		double pourcentage;
+		int n = substrings.size();
 		for(String s : substrings){
+			pourcentage = Math.floor(100.0*compteur/n);
+			System.out.println(pourcentage+"% de la tache effectuée");
 			get_seeds(seeds, s, alphabet, th, k, compteur);
 			compteur++;
 		}
@@ -74,8 +78,6 @@ public class Task7bis {
 		//crées à partir de g et renvoie les indices de debut de perfect match entre un mot de Sg et 
 		//un mot de t.
 		ArbreSeeds seeds = Seeds(g,th,k, alphabet);//on commence par récupérer Sg
-		System.out.println("nombre de graines : "+seeds.size());
-		seeds.print();
 		System.out.println("et on obtient un match pour les index suivants: ");
 		List<Integer> answer = new ArrayList<Integer>(); 
 		for(Integer i = 0; i<=t.length() - k;i++){
