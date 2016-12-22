@@ -50,25 +50,25 @@ import java.util.List;
       public void ajouter_etage(int d){
     	  if(depth == d ){
     		  if(score+best_possible[depth+1]>=th*best_possible[0]){
-        		  add("A");
-            	  add("R");
-            	  add("N");
-            	  add("D");
-            	  add("C");
-            	  add("Q");
-            	  add("E");
-            	  add("G");
-            	  add("H");
-            	  add("I");
-            	  add("L");
-            	  add("M");
-            	  add("F");
-            	  add("P");
-            	  add("S");
-            	  add("T");
-            	  add("W");
-            	  add("Y");
-            	  add("V");
+        		  add('A');
+            	  add('R');
+            	  add('N');
+            	  add('D');
+            	  add('C');
+            	  add('Q');
+            	  add('E');
+            	  add('G');
+            	  add('H');
+            	  add('I');
+            	  add('L');
+            	  add('M');
+            	  add('F');
+            	  add('P');
+            	  add('S');
+            	  add('T');
+            	  add('W');
+            	  add('Y');
+            	  add('V');
     		  }
     	  }
     	  else{
@@ -80,11 +80,16 @@ import java.util.List;
     	  }
       }
       
+      public void add(char c){
+    	  add(new Arbre_Calcul(c));
+      }
+      
       public void add(Arbre_Calcul B){
     	  B.depth = depth + 1;
     	  B.score = score + Blosum50.getScore(B.contenu, s.charAt(B.depth));
     	  B.s=s;
     	  B.best_possible = best_possible;
+    	  B.th = th;
     	  fils.add(B);
       }
       
@@ -139,6 +144,7 @@ import java.util.List;
     	  }
       }
       public List<String> to_list(){
+    	  double kills = 0.0;
     	  List<String> answer = new ArrayList<String>();
     	  to_listAux("", answer);
     	  return answer;
@@ -147,11 +153,12 @@ import java.util.List;
       
       public void to_listAux(String f, List<String> answer){
     	  if(f.length() == s.length()){
-    		  if(score>=best_possible[0]){
+    		  if(score>=best_possible[0]*th){
     			  answer.add(f);
     		  }
     	  }
     	  else{
+
     		  for(Arbre_Calcul B : fils){
     			  B.to_listAux(f+B.contenu,answer);
     		  }
