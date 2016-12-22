@@ -168,14 +168,14 @@ public class Main_Interactif {
 		
 		System.out.println("would you like to run Task7; Second Method : Optimising with trees.");
 		System.out.println("this method requires a lot of memory, we do not recommend it for k>5");
-		reader.nextLine();
+
 		reponse = reader.nextLine();
 		if(reponse.charAt(0) == 'y'){
 		
 			System.out.println("Enter k: ");
 			k = reader.nextInt();
 
-			String g = "AACACGR";
+			String g = "AACACGRTTT";
 
 			System.out.println("Enter th: ");
 			th = reader.nextDouble();
