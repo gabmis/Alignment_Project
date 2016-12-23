@@ -89,28 +89,6 @@ public class Task7bis {
 		}
 	}
 	
-
-
-
-
-	
-
-
-
-//	public static List<Integer> index(String g, String t, int k, double th){//cette fonction imprime les seeds
-//		//crées à partir de g et renvoie les indices de debut de perfect match entre un mot de Sg et 
-//		//un mot de t.
-//		ArbreSeeds seeds = Seeds(g,th,k);//on commence par récupérer Sg
-//		System.out.println("nombre de graines : "+seeds.size());
-//		seeds.print();
-//		System.out.println("et on obtient un match pour les index suivants: ");
-//		List<Integer> answer = new ArrayList<Integer>(); 
-//		for(Integer i = 0; i<=t.length() - k;i++){
-//			if(seeds.contains(t.substring(i, i+k))){
-//				answer.add(i);
-//			}
-//		}
-//		return answer;
 	
 	
 	

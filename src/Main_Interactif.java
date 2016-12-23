@@ -119,6 +119,11 @@ public class Main_Interactif {
 		reader.nextLine();
 		reponse = reader.nextLine();
 		if(reponse.charAt(0) == 'y'){
+			System.out.println("Enter gap_penalty: ");
+			gap_1 = reader.nextDouble();
+			System.out.println("Enter increasing_gap_penalty: ");
+			gap_2 = reader.nextDouble();
+			System.out.println("");
 			Task6.best_local_score(s,t,gap_1,gap_2);
 		}
 		else{System.out.println("ok then let's go to the next task");}
@@ -130,12 +135,13 @@ public class Main_Interactif {
 		
 		System.out.println("would you like to run Task7bis; Fist Method : Naive?.");
 		reponse = reader.nextLine();
+		reponse = reader.nextLine();
 		if(reponse.charAt(0) == 'y'){
 		
 			System.out.println("Enter k: ");
 			k = reader.nextInt();
 
-			String g = "AACACGRNCDACRNDNDC";
+			String g = "AACACGRTTT";
 
 			System.out.println("Enter th: ");
 			th = reader.nextDouble();
@@ -168,14 +174,15 @@ public class Main_Interactif {
 		
 		System.out.println("would you like to run Task7; Second Method : Optimising with trees.");
 		System.out.println("this method requires a lot of memory, we do not recommend it for k>5");
-
+		
+		reponse = reader.nextLine();
 		reponse = reader.nextLine();
 		if(reponse.charAt(0) == 'y'){
 		
 			System.out.println("Enter k: ");
 			k = reader.nextInt();
 
-			String g = "AACACGRTTT";
+			String g = "AACACGRTTTC";
 
 			System.out.println("Enter th: ");
 			th = reader.nextDouble();
@@ -189,7 +196,7 @@ public class Main_Interactif {
 			System.out.println("First Method a mis "+totalTime/1000.0+" secondes à s'executer");
 			
 			System.out.println("nombre de graines pour th = "+th+" : "+U.size());
-			U.print();
+			//U.print();
 			System.out.println("");
 			
 			
@@ -199,16 +206,28 @@ public class Main_Interactif {
 			for(Integer j : index){
 				System.out.println("index : "+j);
 				}
+			if(index.isEmpty()){
+				System.out.println("pas de matchs trouvés");
+			}
 			
 		}
 		
 		
 		
 		//Task8:
-//		System.out.println("****Task8**********************************************************");
-//		double thl = 0.5;
-//		th=0.5;
-//		Task8.match(g,t,k,th,thl);
+		System.out.println("****Task8**********************************************************");
+		
+		System.out.println("Enter k: ");
+		k = reader.nextInt();
+		System.out.println("Enter th: ");
+		th = reader.nextDouble();
+		System.out.println("Enter thl: ");
+		thl = reader.nextDouble();
+		System.out.println("");
+		
+		String g = "AACACGRTTTC";
+		
+		Task8.match(g, t,k,th,thl);
 
 		
 	}

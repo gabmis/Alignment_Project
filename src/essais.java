@@ -14,14 +14,8 @@ public class essais {
 		int k = 4;
 		String g = "AACACG";
 		double th;
-
 		
-
-		th=0.8;
-		ArbreSeeds U = Task7bis.Seeds(g, th, k, alphabet);
-		System.out.println("nombre de graines pour th = "+th+" : "+U.size());
-		U.print();
-		System.out.println("");
+		
 		
 		}
 	}

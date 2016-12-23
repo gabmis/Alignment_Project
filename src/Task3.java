@@ -123,12 +123,11 @@ public class Task3 {
 		lesdeux[0]=answer_s_2;
 		lesdeux[1]=answer_t_2;
 		
-		System.out.println("la plus grande sous séquence commune est "+seq+" elle est de taille "+Task2.lsubsq(s, t));
+		System.out.println("la plus grande sous séquence commune est "+Courant.retourner(seq)+" elle est de taille "+Task2.lsubsq(s, t));
 		//on imprime la plus grande sous-séquence commune
 
 		System.out.println("l'alignement optimal:");
-		System.out.println(answer_s_2);
-		System.out.println(answer_t_2);
+		Courant.nice_display(answer_s_2, answer_t_2);
 		//on imprime l'alignement
 		
 		return lesdeux;

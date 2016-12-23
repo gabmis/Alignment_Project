@@ -13,10 +13,9 @@ public class Task8 {
 	public static void match(String g, String t, int k, double th,double thl){//cette fonction imprime les seeds
 		//crées à partir de g et renvoie les indices de debut de perfect match entre un mot de Sg et 
 		//un mot de t.
-		char[] alphabet = new char[] {'A', 'R', 'N', 'D', 'C', 'Q', 'E', 'G', 'H', 'I', 'L', 'K', 'M', 'F', 'P', 'S', 'T', 'W', 'Y', 'V'};
-		List<String> substrings = Task7bis.Wg(g, k);
+		List<String> substrings = Task7.Wg(g, k);
 		String current;
-		ArbreSeeds seeds = Task7bis.Seeds(g,th,k, alphabet);//on commence par récupérer Sg
+		ArbreSeeds seeds = Task7.Seeds(g,th,k);//on commence par récupérer Sg
 		System.out.println("nombre de graines : "+seeds.size());
 		System.out.println("et on obtient un match pour les index suivants: ");
 		List<Integer> index = new ArrayList<Integer>();

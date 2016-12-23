@@ -136,8 +136,7 @@ public class Task4 {
 		
 		System.out.println("");
 		System.out.println("Ce score est obtenu pour cet alignement: ");
-		System.out.println(answer_s_2);
-		System.out.println(answer_t_2);
+		Courant.nice_display(answer_s_2, answer_t_2);
 		
 		return lesdeux;
 		//on renvoie les deux séquences avec tiret (ça servira peut etre plus tard)
