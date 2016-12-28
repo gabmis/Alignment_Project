@@ -1,18 +1,23 @@
 import java.util.ArrayList;
 import java.util.List;
 /* A R N D C Q E G H I L K M F P S T W Y V */
+
 //un autre arbre qui va nous permettre de générer tous les mots de k lettres et d'évaluer leurs scores par rapport à un chaine de caractères
 //on économise donc du temps de calcul à l'aide de la structure d'abre et on élimine au fur et à mesure les branches mortes.
+//c'est à dire qu'on ne continue pas à explorer une branche si on sait que tous ses descendants ne respecteront pas le 
+//critère
 
-//classe à tester
     class Arbre_Calcul {
       char contenu;
       List<Arbre_Calcul> fils = new ArrayList<Arbre_Calcul>();
       float score = 0;
       int depth;
+      //nous permettra de nous repérer dans l'abre
+      
       String s;
       double th;
       double[] best_possible;
+      //il est plus simple d'avoir ces informations en mémoire
       
       Arbre_Calcul(char c){
     	  contenu = c;
@@ -38,7 +43,7 @@ import java.util.List;
     	  int k = f.length();
     	  best_possible = new double[k];
     	  for(int i=0; i<k;i++){
-    		  best_possible[i]=Task8.score(s.substring(i,k),s.substring(i,k));
+    		  best_possible[i]=Courant.score(s.substring(i,k),s.substring(i,k));
     	  }
     	  
     	  for(int i = 0; i<k;i++){
@@ -48,33 +53,29 @@ import java.util.List;
       }
       
       public void ajouter_etage(int d){
+    	  //cette fonction permet d'ajouter un cran en profondeur à l'arbre
+    	  //l'arbre ne se développe que la ou il "y a de l'espoir"
+    	  
     	  if(depth == d ){
     		  if(score+best_possible[depth+1]>=th*best_possible[0]){
-        		  add('A');
-            	  add('R');
-            	  add('N');
-            	  add('D');
-            	  add('C');
-            	  add('Q');
-            	  add('E');
-            	  add('G');
-            	  add('H');
-            	  add('I');
-            	  add('L');
-            	  add('M');
-            	  add('F');
-            	  add('P');
-            	  add('S');
-            	  add('T');
-            	  add('W');
-            	  add('Y');
-            	  add('V');
+    			  //on vérifie que ce n'est pas une branche morte
+    			  //on ajoute alors une nouvelle profondeur à cette branche
+    			  
+    			  char[] alphabet = Courant.alphabet();
+    			  
+    			  for(int i = 0; i<alphabet.length;i++){
+    				  add(alphabet[i]);
+    			  }
     		  }
     	  }
     	  else{
     		  if(depth<d){
+    			  //sinon on continue de parcourir les branches jusqu'a arriver à la bonne profondeur
+    			  
     		  for(Arbre_Calcul B : fils){
     			  B.ajouter_etage(d);
+    			  //on rappelle la fonction sur les enfants
+    			  
     		  }
     		  }
     	  }
@@ -87,9 +88,13 @@ import java.util.List;
       public void add(Arbre_Calcul B){
     	  B.depth = depth + 1;
     	  B.score = score + Blosum50.getScore(B.contenu, s.charAt(B.depth));
+    	  //on calcule alors la profondeur de B et son score à partie de son père
+    	  
     	  B.s=s;
     	  B.best_possible = best_possible;
     	  B.th = th;
+    	  //on recopie ces valeurs
+    	  
     	  fils.add(B);
       }
       
@@ -117,25 +122,26 @@ import java.util.List;
       }
       
       
-      public void clear_scores(){
-    	  if(fils.isEmpty()==false){
-    		  for (Arbre_Calcul B : fils){
-    			  B.score = 0;
-    			  B.clear_scores();
-    		  }
-    	  }
-      }
-      
-      public void compute_scores(String s){//calcule tous les scores relatifs à ce string s
-    	  									//pas de soucis dans les tests
-    	  clear_scores();
-    	  if(fils.isEmpty()==false){
-    		  for (Arbre_Calcul B : fils){
-    			  B.score = score + Blosum50.getScore(B.contenu, s.charAt(0));
-    			  B.compute_scores(s.substring(1,s.length()));
-    		  }
-    	  }
-      }
+//      public void clear_scores(){
+//    	  if(fils.isEmpty()==false){
+//    		  for (Arbre_Calcul B : fils){
+//    			  B.score = 0;
+//    			  B.clear_scores();
+//    		  }
+//    	  }
+//      }
+//      
+//      public void compute_scores(String s){
+//    	  //calcule tous les scores relatifs à ce string s
+//    	  clear_scores();
+//    	  
+//    	  if(fils.isEmpty()==false){
+//    		  for (Arbre_Calcul B : fils){
+//    			  B.score = score + Blosum50.getScore(B.contenu, s.charAt(0));
+//    			  B.compute_scores(s.substring(1,s.length()));
+//    		  }
+//    	  }
+//      }
       
       public void print(){
     	  List<String> answer = to_list();
@@ -144,9 +150,11 @@ import java.util.List;
     	  }
       }
       public List<String> to_list(){
-    	  double kills = 0.0;
+    	  //cette méthode récupère tous les mots de l'arbre de taille suffisante et répondant au critère de score
+    	  
     	  List<String> answer = new ArrayList<String>();
     	  to_listAux("", answer);
+    	  
     	  return answer;
     	  
       }
@@ -165,8 +173,9 @@ import java.util.List;
     	  }
       }
       
-      public float score(String s){//cette fonction va chercher le score du string s
-    	  							//tout ca a l'air de bien marcher
+      public float score(String s){
+    	  //cette fonction va chercher le score du string s
+    	  
     	  if(s.isEmpty()){return score;}
     	  else{
     		  for(Arbre_Calcul B : fils){

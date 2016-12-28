@@ -23,7 +23,6 @@ public class Main_Interactif {
 			e.printStackTrace();
 		}*/
 		
-		char[] alphabet = new char[] {'A', 'R', 'N', 'D', 'C', 'Q', 'E', 'G', 'H', 'I', 'L', 'K', 'M', 'F', 'P', 'S', 'T', 'W', 'Y', 'V'};
 		
 		String reponse;
 		long startTime;
@@ -148,7 +147,7 @@ public class Main_Interactif {
 		
 			startTime = System.currentTimeMillis();
 
-			ArbreSeeds U = Task7bis.Seeds(g, th, k, alphabet);
+			ArbreSeeds U = Task7bis.Seeds(g, th, k);
 			
 			endTime   = System.currentTimeMillis();
 			totalTime = endTime - startTime;
@@ -159,7 +158,8 @@ public class Main_Interactif {
 			System.out.println("");
 			
 			
-			List<Integer> index = Task7bis.index(g, t, k, th, alphabet);
+			List<Integer> index = Task7bis.index(g, t, k, th);
+			System.out.println("et on obtient un match pour les index suivants: ");
 			for(Integer j : index){
 				System.out.println("index : "+j);
 				}

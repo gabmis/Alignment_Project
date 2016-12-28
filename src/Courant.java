@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 
 public class Courant {
 	
@@ -35,6 +37,63 @@ public class Courant {
 		System.out.println(s);
 		System.out.println(x);
 		System.out.println(t);
+	}
+	
+	public static List<String> Wg(String g, int k){
+		//cette fonction permet simplement de renvoyer une liste contenant Wg c'est à dire la liste des sous-mots de g de taille k
+		
+		List<String> answer = new ArrayList<String>();
+		
+		for(int i = 0; i<=g.length()-k; i++){
+			answer.add(g.substring(i, i+k));
+		}
+		
+		return answer;
+	}
+	
+	public static int [] plus_one(int[] tab){
+		//cette fonction prend en argument un tableau représentant un nombre en base 20
+		//Il renvoie la représentation en base 20 de ce nombre plus 1
+		
+		int n = tab.length - 1;
+		//on se place à la fin du tableau
+		
+		while(true){
+			
+			if(tab[n]<19 || n==0){
+				
+				tab[n]=tab[n]+1;
+				//NB si on a atteint le nombre maximal (rempli de 19) alors on ne rajoute pas de case mais on met la première à 20
+				//on se servira de cela pour savoir que l'on a atteint le maximum
+				
+					for(int i = n+1;i<=tab.length-1;i++){
+						tab[i]=0;
+						//quand on incrémente une case il faut faire un reset sur toutes celles qui suivent
+					}
+					
+					break;
+				}
+			n--;
+			}
+		return tab;
+		}
+	
+	public static double score(String g, String t){
+		//renvoie le produit scalaire entre les deux strings (caractère à caractère)
+		
+		double s = 0;
+		
+		for(int i = 0; i<g.length();i++){
+			s+=Blosum50.getScore(t.charAt(i), g.charAt(i));
+		}
+		return s;
+	}
+	
+	public static char[] alphabet(){
+		//juste une méthode qui permet de récupérer l'alphabet
+		
+		char[] alphabet = new char[] {'A', 'R', 'N', 'D', 'C', 'Q', 'E', 'G', 'H', 'I', 'L', 'K', 'M', 'F', 'P', 'S', 'T', 'W', 'Y', 'V'};
+		return alphabet;
 	}
 
 }

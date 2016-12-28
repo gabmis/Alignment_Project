@@ -210,6 +210,7 @@ public class Task5 {
 		System.out.println("nombre de pénalités gap_1 = "+compteur_1+"   nombre de pénalités gap_2 = "+compteur_2);
 		
 		
-		return lesdeux;//on renvoie les deux séquences avec tiret (ça servira peut etre plus tard)
+		return lesdeux;
+		//on renvoie les deux séquences avec tiret (ça servira peut etre plus tard)
 	}
 }
