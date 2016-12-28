@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-/* A R N D C Q E G H I L K M F P S T W Y V */
 
 //un autre arbre qui va nous permettre de générer tous les mots de k lettres et d'évaluer leurs scores par rapport à un chaine de caractères
 //on économise donc du temps de calcul à l'aide de la structure d'abre et on élimine au fur et à mesure les branches mortes.
@@ -122,33 +121,7 @@ import java.util.List;
       }
       
       
-//      public void clear_scores(){
-//    	  if(fils.isEmpty()==false){
-//    		  for (Arbre_Calcul B : fils){
-//    			  B.score = 0;
-//    			  B.clear_scores();
-//    		  }
-//    	  }
-//      }
-//      
-//      public void compute_scores(String s){
-//    	  //calcule tous les scores relatifs à ce string s
-//    	  clear_scores();
-//    	  
-//    	  if(fils.isEmpty()==false){
-//    		  for (Arbre_Calcul B : fils){
-//    			  B.score = score + Blosum50.getScore(B.contenu, s.charAt(0));
-//    			  B.compute_scores(s.substring(1,s.length()));
-//    		  }
-//    	  }
-//      }
       
-      public void print(){
-    	  List<String> answer = to_list();
-    	  for(String s : answer){
-    		  System.out.println("string : "+s);
-    	  }
-      }
       public List<String> to_list(){
     	  //cette méthode récupère tous les mots de l'arbre de taille suffisante et répondant au critère de score
     	  
